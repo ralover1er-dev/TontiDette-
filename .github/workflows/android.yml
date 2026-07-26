@@ -17,12 +17,11 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     
-    - run: chmod +x */gradlew
+    - run: chmod +x ./gradlew
     
     - run: ./gradlew assembleRelease
-      working-directory: tontidette
     
     - uses: actions/upload-artifact@v4
       with:
         name: TontiDette-Release-APK
-        path: tontidette/app/build/outputs/apk/release/*.apk
+        path: app/build/outputs/apk/release/*.apk
