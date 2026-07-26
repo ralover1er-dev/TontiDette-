@@ -1,4 +1,4 @@
-name: Debug TontiDette
+name: Build TontiDette APK
 
 on:
   push:
@@ -12,11 +12,20 @@ jobs:
     
     - run: tar -xzf tontidette.tar.gz
     
-    - name: VOIR TOUT LE CONTENU
+    - uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    
+    - name: Chercher gradlew et compiler
       run: |
-        echo "=== RACINE ==="
-        ls -la
-        echo "=== DOSSIERS ==="
-        ls -la */
-        echo "=== CHERCHER GRADLEW ==="
-        find . -name gradlew
+        GRADLEW=$(find . -name gradlew -type f | head -1)
+        chmod +x $GRADLEW
+        DIR=$(dirname $GRADLEW)
+        cd $DIR
+        ./gradlew assembleRelease
+    
+    - uses: actions/upload-artifact@v4
+      with:
+        name: TontiDette-Release-APK
+        path: '**/app/build/outputs/apk/release/*.apk'
