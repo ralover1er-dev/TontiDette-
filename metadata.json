@@ -1,0 +1,6 @@
+{
+  "name": "TontiDette",
+  "description": "Gérez vos dettes et vos tontines en toute simplicité au Cameroun.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
