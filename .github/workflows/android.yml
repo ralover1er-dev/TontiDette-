@@ -12,8 +12,17 @@ jobs:
     
     - run: tar -xzf tontidette.tar.gz
     
-    - name: Voir ce qu'il y a après unzip
-      run: ls -la
+    - uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
     
-    - name: Voir à l'intérieur des dossiers
-      run: ls -la */
+    - run: chmod +x */gradlew
+    
+    - run: ./gradlew assembleRelease
+      working-directory: tontidette
+    
+    - uses: actions/upload-artifact@v4
+      with:
+        name: TontiDette-Release-APK
+        path: tontidette/app/build/outputs/apk/release/*.apk
