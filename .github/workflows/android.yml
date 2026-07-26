@@ -12,6 +12,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: List files
+      run: ls -la
+
     - name: Unzip project
       run: |
         tar -xzf tontidette.tar.gz
@@ -21,13 +24,13 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-        
+
     - name: Grant execute permission for gradlew
-      run: chmod +x ./tontidette/gradlew
+      run: chmod +x tontidette/gradlew
 
     - name: Build with Gradle
-      run: ./tontidette/gradlew assembleRelease
-      working-directory: ./tontidette
+      run: ./gradlew assembleRelease
+      working-directory: tontidette
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
