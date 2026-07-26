@@ -7,33 +7,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: List files
+    - uses: actions/checkout@v4
+    
+    - run: tar -xzf tontidette.tar.gz
+    
+    - name: Voir ce qu'il y a après unzip
       run: ls -la
-
-    - name: Unzip project
-      run: |
-        tar -xzf tontidette.tar.gz
-
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-
-    - name: Grant execute permission for gradlew
-      run: chmod +x tontidette/gradlew
-
-    - name: Build with Gradle
-      run: ./gradlew assembleRelease
-      working-directory: tontidette
-
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: TontiDette-Release-APK
-        path: tontidette/app/build/outputs/apk/release/*.apk
+    
+    - name: Voir à l'intérieur des dossiers
+      run: ls -la */
